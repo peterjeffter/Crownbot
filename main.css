@@ -4,7 +4,7 @@ body{
     justify-content: center;
     align-items: center;
     background: linear-gradient(to top, rgb(66, 66, 133) 20%, lightblue 70%);
-    height: 500px;
+    height: 650px;
     margin: 0;
 }
 .profileicon{

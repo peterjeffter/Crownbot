@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigzag Roadmap</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.roadmap {
+    position: relative;
+    width: 80%;
+    margin: 50px auto;
+}
+
+.milestone {
+    position: relative;
+    width: 50%;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.milestone:nth-child(odd) {
+    float: left;
+    clear: both;
+}
+
+.milestone:nth-child(even) {
+    float: right;
+}
+
+.milestone-content {
+    text-align: center;
+}
+
+.milestone:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #fff;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.milestone:nth-child(odd):before {
+    border-bottom-color: #fff;
+    border-top: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #fff;
+    top: auto;
+    bottom: -20px;
+    border-top-color: #ddd;
+}
+
+.roadmap:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+    </style>
+</head>
+<body>
+    <div class="roadmap">
+        <div class="milestone" id="milestone1">
+            <div class="milestone-content">
+                <h2>Milestone 1</h2>
+                <p>Description for milestone 1</p>
+            </div>
+        </div>
+        <div class="milestone" id="milestone2">
+            <div class="milestone-content">
+                <h2>Milestone 2</h2>
+                <p>Description for milestone 2</p>
+            </div>
+        </div>
+        <div class="milestone" id="milestone3">
+            <div class="milestone-content">
+                <h2>Milestone 3</h2>
+                <p>Description for milestone 3</p>
+            </div>
+        </div>
+        <div class="milestone" id="milestone4">
+            <div class="milestone-content">
+                <h2>Milestone 4</h2>
+                <p>Description for milestone 4</p>
+            </div>
+        </div>
+        <div class="milestone" id="milestone5">
+            <div class="milestone-content">
+                <h2>Milestone 5</h2>
+                <p>Description for milestone 5</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js">
+        document.querySelectorAll('.milestone').forEach(milestone => {
+    milestone.addEventListener('click', () => {
+        alert(`You clicked on ${milestone.querySelector('h2').innerText}`);
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -3,21 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profilesettings</title>
+    <title>Profile Settings</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <a href="index.html"><img src="icons/back.png" alt="" class="backbtn"></a>
+    <a href="main.html"><img src="icons/back.png" alt="Back" class="backbtn"></a>
+
+    <!-- Profile Details Section -->
     <div class="profdetails">
-        
-        <div class="profdetails">
-            <img class="profpic" src="icons/user (1).png" alt="">
-            <div class="desc">
-                <span class="username">Ternder Jeff</span>
-                <span class="level">amethyst</span>
-                <span class="balance"><img src="icons/crown.png" alt="">20,000</span>
-            </div>
+        <img class="profpic" src="icons/user.png">
+        <div class="desc">
+            <span id="usaname" class="username">k</span> <!-- User's Name -->
+            <span id="idname" class="level">y</span>
+            <span id="baal" class="balance"><img src="icons/crown.png">10,000</span> <!-- Balance -->
         </div>
-        <div class="email"></div>
     </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <script defer src="profile.js">
+        window.Telegram.WebApp.ready();
+const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+if (user) {
+    // Show authenticated user's name in the profile section or balance section
+    const profileIcon = document.getElementById('usaname');
+    const profid = document.getElementById('idname')
+    profileIcon.innerHTML = `${user.first_name} ${user.last_name}`;
+    profid.innerHTML = `${user.id}`
+
+    console.log(`User ID: ${user.id}`);
+    console.log(`First Name: ${user.first_name}`);
+    console.log(`Last Name: ${user.last_name}`);
+} else {
+    console.log('User is not authenticated via Telegram');
+}
+    </script>
+</body>
 </html>

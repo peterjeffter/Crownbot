@@ -11,10 +11,26 @@
     <img src="icons/crown.png" alt="">
     <button class="connectbtn"><img src="icons/money.png" alt="">Connect wallet</button>
     <div class="footer">
-        <a href="index.html"><div class="minediv"><img src="icons/mining.png" alt="" class="mine"></a>Mine</div>
-        <a href="tasks.html"><div class="tsks"><img src="icons/task.png" alt="" class="kgdmicon"></a>Tasks</div>
-        <a href=""><div class="ardrp"><img src="icons/airdrop.png" alt="" class="ardrpimg"></a>Airdrop</div>
-        <a href="friends.html"><div class="friendsdiv"><img src="icons/friends.png" alt="" class="friends"></a>Friends</div>
+        <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="" >Mine</a>
+        <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
+        <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
+        <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
     </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.nav-icon');
+    const currentPage = window.location.href.split('/').pop(); // Get the current page name
+
+    icons.forEach(icon => {
+        // Ensure to check against the full href value, not just the last part
+        if (icon.getAttribute('href') === currentPage) {
+            icon.classList.add('active'); // Add active class to the current page icon
+        } else {
+            icon.classList.remove('active'); // Remove active class from other icons
+        }
+    });
+});
+
+</script>
 </body>
 </html>

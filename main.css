@@ -9,6 +9,8 @@ body{
     background-image: url(pexels-danielabsi-952670.jpg);
     background-size: contain;
     font-family: "Roboto", sans-serif;
+     font-weight: 100;
+  font-style: normal;
 }
 .profileicon{
     position: absolute;

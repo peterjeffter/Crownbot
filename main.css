@@ -9,7 +9,7 @@ body{
     background-image: url(pexels-danielabsi-952670.jpg);
     background-size: contain;
     font-family: "Roboto", sans-serif;
-     font-weight: 200;
+     font-weight: 300;
   font-style: normal;
 }
 .profileicon{
@@ -66,7 +66,7 @@ body{
     bottom: 70px;
     left: 0;
     right: 0;
-    color: wheat;
+    color: white;
     
 }
 .friendslist h3{

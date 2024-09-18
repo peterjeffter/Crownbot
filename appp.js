@@ -121,3 +121,18 @@ document.getElementById('startMining').addEventListener('click', startMining);
 
 // Initial UI update
 initialize();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.nav-icon');
+    const currentPage = window.location.href.split('/index.html').pop(); // Get the current page name
+
+    icons.forEach(icon => {
+        if (icon.getAttribute('href') === currentPage) {
+            icon.classList.add('active'); // Add active class to the current page icon
+        } else {
+            icon.classList.remove('active'); // Remove active class from other icons
+        }
+    });
+});
+
+

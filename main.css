@@ -9,8 +9,6 @@ body{
     background-image: url(pexels-danielabsi-952670.jpg);
     background-size: contain;
     font-family: "Roboto", sans-serif;
-     font-weight: 300;
-  font-style: normal;
 }
 .profileicon{
     position: absolute;
@@ -39,7 +37,7 @@ body{
     height: 70px;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 8px;
 }
 .footer a img{
     width: 24px;
@@ -178,7 +176,7 @@ body{
     height: 50px;
     width: 100%;
     color: white;
-    font-size: 18px;
+    font-size: 13px;
     border-radius: 10px;
     margin-bottom: 10px;
     padding: 0 10px 0 10px;
@@ -186,6 +184,7 @@ body{
 .tasksdiv span{
     color: gold;
     font-size: 10px;
+    margin-top: 20px;
 }
 h3{
     color:white;
@@ -214,18 +213,6 @@ h3{
     height: 50px;
     width: 300px;
     font-size: 17px;
-}
-.gobtn{
-    background-color: black;
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-.gobtn.claimed{
-    width: 60px;
-    background-color: green;
 }
 
 .crownbal{

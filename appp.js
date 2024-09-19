@@ -136,3 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+        // loading.js
+
+     window.addEventListener('load', function () {
+            // Hide the loading screen and display the main content
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+        
+            loadingScreen.style.display = 'none';  // Hide loading screen
+            mainContent.classList.remove('hidden');  // Show main content
+    });
+        

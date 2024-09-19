@@ -147,3 +147,18 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.classList.remove('hidden');  // Show main content
     });
         
+    window.Telegram.WebApp.ready();
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
+    
+    if (user) {
+        // Show authenticated user's name in the profile section or balance section
+        const homeusername = document.getElementById('usernamehome');
+        const profid = document.getElementById('idname')
+        homeusername.innerHTML = `${user.username}`;
+    
+        console.log(`User ID: ${user.id}`);
+        console.log(`First Name: ${user.first_name}`);
+        console.log(`Last Name: ${user.username}`);
+    } else {
+        console.log('User is not authenticated via Telegram');
+    }

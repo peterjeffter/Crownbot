@@ -11,11 +11,7 @@ body{
     font-family: "Roboto", sans-serif;
 }
 
-.profileicon{
-    position: absolute;
-    top: 20px;
-    left: 10%;
-}
+
 .bigcrown{
     position: absolute;
     top: 80px;
@@ -126,12 +122,18 @@ body{
     width: 20px;
     margin-right: 20px;
 }
-
-
 .backbtn{
     position: absolute;
     top: 20px;
     left: 30px;
+}
+.profileandbalance{
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    align-items: center;
 }
 .profpic{
     margin-right: 30px;
@@ -192,15 +194,16 @@ h3{
     margin-top: 80px;
 }
 .balicon{
-    width: 50px;
+    width: 40px;
 }
-.balsection{
-    position: absolute;
-    top: 20px;
+#balance{
     display: flex;
     align-items: center;
     font-size: 22px;
     color: rgb(186, 217, 235);
+}
+#usernamehome{
+    color: white;
 }
 .claimbtn{
     position: absolute;
@@ -272,8 +275,6 @@ h3{
 }
 
 .spinner {
-    display: flex;
-    flex-direction: column;
     border: 8px solid #f3f3f3;
     border-radius: 50%;
     border-top: 8px solid #3498db;

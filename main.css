@@ -265,6 +265,7 @@ h3{
     height: 100%;
     background-color: #fff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;

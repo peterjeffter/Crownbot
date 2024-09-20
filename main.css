@@ -113,6 +113,9 @@ body{
     border: none;
     width: 13%;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .sharelink{
     width: 85%;

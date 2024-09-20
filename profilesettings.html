@@ -32,7 +32,7 @@ if (user) {
     // Show authenticated user's name in the profile section or balance section
     const profileIcon = document.getElementById('usaname');
     const profid = document.getElementById('idname')
-    profileIcon.innerHTML = `${user.username}`;
+    profileIcon.innerHTML = `${user.first_name} ${user.last_name}`;
     profid.innerHTML = `${user.id}`
 
     console.log(`User ID: ${user.id}`);

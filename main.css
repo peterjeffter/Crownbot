@@ -130,10 +130,13 @@ body{
 .profileandbalance{
     position: absolute;
     top: 20px;
-    left: 80px;
+    left: 30px;
     display: grid;
     grid-template-columns:1fr 1fr;
     align-items: center;
+}
+.profileicon{
+    width: 32px;
 }
 .profpic{
     margin-right: 30px;
@@ -194,7 +197,7 @@ h3{
     margin-top: 80px;
 }
 .balicon{
-    width: 40px;
+    width: 35px;
 }
 #balance{
     display: flex;
@@ -204,6 +207,7 @@ h3{
 }
 #usernamehome{
     color: white;
+    opacity: 0.5;
 }
 .claimbtn{
     position: absolute;

@@ -15,7 +15,7 @@ body{
 .bigcrown{
     position: absolute;
     top: 80px;
-    width: 350px;
+    width: 300px;
 }
 
 .footer{
@@ -132,8 +132,11 @@ body{
     top: 20px;
     left: 30px;
     display: grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     align-items: center;
+}
+.baldiv{
+    display: flex;
 }
 .profileicon{
     width: 32px;
@@ -202,16 +205,18 @@ h3{
 #balance{
     display: flex;
     align-items: center;
-    font-size: 16px;
-    color: rgb(186, 217, 235);
+    font-size: 19px;
+    font-weight: 500;
+    color: goldenrod;
 }
 #usernamehome{
     color: white;
     opacity: 0.5;
+    margin-left: 10px;
 }
 .claimbtn{
     position: absolute;
-    top: 400px ;
+    top: 420px ;
     color: white;
     background-color: rgb(121, 196, 78);
     border: none;
@@ -263,7 +268,6 @@ h3{
 .confirmpopup input{
     width: 60px;
 }
-
 
 #loading-screen {
     background-image: url(icons/Crown.gif); /* Set GIF as background */

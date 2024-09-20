@@ -136,16 +136,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-        // loading.js
+     // loading.js
 
-     window.addEventListener('load', function () {
-            // Hide the loading screen and display the main content
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.getElementById('main-content');
-        
-            loadingScreen.style.display = 'none';  // Hide loading screen
-            mainContent.classList.remove('hidden');  // Show main content
+// Check if the page has been loaded before
+if (!localStorage.getItem('pageLoaded')) {
+    // First time loading: Show loading screen
+    window.addEventListener('load', function () {
+        const loadingScreen = document.getElementById('loading-screen');
+        const mainContent = document.getElementById('main-content');
+    
+        loadingScreen.style.display = 'none';  // Hide loading screen
+        mainContent.classList.remove('hidden');  // Show main content
+
+        // Store in localStorage that the page has been loaded
+        localStorage.setItem('pageLoaded', 'true');
     });
+} else {
+    // Page was already loaded before: Skip loading screen
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('main-content').classList.remove('hidden');
+}
+
         
     window.Telegram.WebApp.ready();
     const user = window.Telegram.WebApp.initDataUnsafe.user;

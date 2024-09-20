@@ -111,14 +111,14 @@ body{
 .copylink{
     background-color: green;
     border: none;
-    width: 13%;
+    width: 20%;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .sharelink{
-    width: 85%;
+    width: 80%;
     height: 40px;
     background-color: green;
     color: white;

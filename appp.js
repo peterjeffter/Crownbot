@@ -136,26 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-     // loading.js
+// loading.js
 
-// Check if the page has been loaded before
-if (!localStorage.getItem('pageLoaded')) {
-    // First time loading: Show loading screen
-    window.addEventListener('load', function () {
+window.addEventListener('load', function () {
+    // Wait for 4 seconds (4000 ms) before hiding the loading screen
+    setTimeout(function () {
         const loadingScreen = document.getElementById('loading-screen');
         const mainContent = document.getElementById('main-content');
     
         loadingScreen.style.display = 'none';  // Hide loading screen
         mainContent.classList.remove('hidden');  // Show main content
-
-        // Store in localStorage that the page has been loaded
-        localStorage.setItem('pageLoaded', 'true');
-    });
-} else {
-    // Page was already loaded before: Skip loading screen
-    document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('main-content').classList.remove('hidden');
-}
+    }, 4000);  // 4-second delay to match the GIF duration
+});
 
         
     window.Telegram.WebApp.ready();

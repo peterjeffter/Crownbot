@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>friends</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
         <div class="friendslist">
             <h3>FRENS</h3>
-            <div>Tersoo Agba</div>
-            <div>Tersoo Agba </div>
-            <div>Tersoo Agba </div>
-            <div>Tersoo Agba </div>
-            <button><img src="icons/link.png" alt="">Invite friends</button>
+            <span>You have no friends</span>
+            <div id="referral" style="display: none;">samuel tor</div>
         </div>
+        <div class="btndiv">
+            <button class="copylink"><img src="icons/copy.png" alt=""></button>
+            <button class="sharelink"><img src="icons/link.png" alt="">Invite friends</button>
+           </div>
         <div class="footer">
             <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="" >Mine</a>
             <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
             <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
             <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
         </div>
+
+
         <script>
          document.addEventListener('DOMContentLoaded', () => {
     const icons = document.querySelectorAll('.nav-icon');

@@ -1,88 +1,345 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
-    <link rel="stylesheet" href="main.css">
-    
-</head>
-<body>
-    <h3>Complete tasks to earn bonuses</h3>
-    <div class="tasksdiv">
-        
-            <div>Follow x account <span><img src="icons/" alt="">50,000</span><img src="icons/arrow-right.png" id="task1" class="gobtn"></div>
-            <div>Follow instagram account  <span><img src="icons/" alt="">50,000</span><img src="icons/arrow-right.png" id="task2" class="gobtn"></div>
-            <div>Follow x account <span><img src="icons/" alt="">+50,000</span><img src="icons/arrow-right.png" id="task3" class="gobtn"></div>
-            <div>Follow instagram account  <span><img src="icons/" alt="">+50,000</span><img src="icons/arrow-right.png" id="task4" class="gobtn"></div>
-    </div>
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, rgb(66, 66, 133) 20%, lightblue 70%);
+    height: 100vh;
+    margin: 0;
+    background-image: url(icons/backgroundblack.png);
+    background-size: contain;
+    font-family: "Roboto", sans-serif;
+}
 
-    <div class="confirmpopup">
-        <span>Input code hidden in video</span>
-        <input type="text">
-        <button>Check</button>
-    </div>
 
-    <div class="footer">
-        <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="" >Mine</a>
-        <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
-        <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
-        <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.gobtn');
-            const popup = document.querySelector('.confirmpopup');
-            const checkButton = popup.querySelector('button');
-            
-            // Function to show the popup
-            const showPopup = () => {
-                setTimeout(() => {
-                    popup.classList.add('show');
-                    popup.style.display = 'flex'; // Ensure the popup is displayed
-                }, 2000); // 3000 milliseconds = 3 seconds
-            };
-        
-            // Function to hide the popup
-            const hidePopup = () => {
-                popup.classList.remove('show');
-                setTimeout(() => {
-                    popup.style.display = 'none'; // Hide it completely after transition
-                }, 500); // Match this delay with the CSS transition duration
-            };
-        
-            // Attach click event to "Go" buttons to show the popup with a delay
-            buttons.forEach(button => {
-                button.addEventListener('click', showPopup);
-            });
-        
-            // Attach click event to "check" button to hide the popup
-            checkButton.addEventListener('click', hidePopup);
-        
-            // Attach click event to document to hide the popup if clicking outside
-            document.addEventListener('click', (event) => {
-                if (!popup.contains(event.target) && !Array.from(buttons).includes(event.target)) {
-                    hidePopup();
-                }
-            });
-        });
+.bigcrown{
+    position: absolute;
+    top: 80px;
+    width: 300px;
+}
 
-        document.addEventListener('DOMContentLoaded', () => {
-    const icons = document.querySelectorAll('.nav-icon');
-    const currentPage = window.location.href.split('/').pop(); // Get the current page name
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background-color: black;
+    color:white;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+}
+.footer a img{
+    width: 30px;
+}
+.nav-icon{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    opacity: 0.3;
+}
+.active{
+    opacity: 1;
+}
+.friendslist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 110px;
+    left: 0;
+    right: 0;
+    color: white;
+}
+.friendslist h3{
+    background-color: whitesmoke;
+    color: black;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -45px;
+    width: 100%;
+    border-radius: 8px 8px 0 0 ;
+}
+.friendslist div{
+    background-color: black;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.friendslist span{
+    font-size: 13px;
+    background-color: black;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    opacity: 0.5;
+}
+.friendslist div::after{
+    content: '';
+    position: absolute;
+    left: 0; /* Start the line from the left padding */
+    right: 0; /* Extend the line to the right padding */
+    bottom: 0; /* Position the line at the bottom of the div */
+    border-bottom: 1px solid white; /* The white line */
+    width: calc(100% - 30px); /* Adjust the width to leave space on both sides */
+    margin: 0 15px; /
+}
+.friendslist div:last-child::after{
+    content: none;
+}
+.btndiv{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    position: fixed;
+    bottom: 70px;
+}
+.copylink{
+    background-color: green;
+    border: none;
+    width: 13%;
+    border-radius: 10px;
+}
+.sharelink{
+    width: 85%;
+    height: 40px;
+    background-color: green;
+    color: white;
+    font-size: 15px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.friendslist button img{
+    width: 15px;
+    margin-right: 20px;
+}
+.connectbtn{
+    height: 50px;
+    background-color: rgb(7, 7, 37);
+    border: none;
+    color: white;
+    width: 200px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.connectbtn img{
+    width: 20px;
+    margin-right: 20px;
+}
+.backbtn{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+.profileandbalance{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: grid;
+    grid-template-columns:1fr;
+    align-items: center;
+}
+.baldiv{
+    display: flex;
+}
 
-    icons.forEach(icon => {
-        // Ensure to check against the full href value, not just the last part
-        if (icon.getAttribute('href') === currentPage) {
-            icon.classList.add('active'); // Add active class to the current page icon
-        } else {
-            icon.classList.remove('active'); // Remove active class from other icons
-        }
-    });
-});
+.profpic{
+    margin-right: 30px;
+    width: 50px;
+    margin-left: 30px;
+}
+.profdetails{
+    display: flex;
+    color: white;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.37);
+    height: 100px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+.desc{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.desc img{
+    width: 30px;
+}
 
-        </script>
-        
-        
-</body>
-</html>
+.tasksdiv{
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+   
+}
+.tasksdiv img{
+    width: 24px;
+}
+.tasksdiv div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(90, 69, 69);
+    height: 50px;
+    width: 100%;
+    color: white;
+    font-size: 13px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 0 10px 0 10px;
+}
+.tasksdiv span{
+    color: gold;
+    font-size: 10px;
+    margin-top: 20px;
+}
+h3{
+    color:white;
+}
+.mining-info{
+    margin-top: 80px;
+}
+.balicon{
+    width: 35px;
+}
+#balance{
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 500;
+    color: goldenrod;
+}
+#usernamehome{
+    color: white;
+    opacity: 0.5;
+    margin-left: 10px;
+}
+.navtoprofile{
+    text-decoration: none;
+}
+.claimbtn{
+    position: absolute;
+    top: 420px ;
+    color: white;
+    background-color: rgb(121, 196, 78);
+    border: none;
+    border-radius: 15px;
+    height: 50px;
+    width: 300px;
+    font-size: 17px;
+}
+
+.crownbal{
+    color: white;
+}
+.username{
+    color: white;
+}
+
+.confirmpopup {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(211, 204, 204, 0.514);
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    position: fixed;
+    bottom: -100px; 
+    transition: bottom 1s ease-in-out; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.confirmpopup.show {
+    display: flex;
+    bottom: 70px;
+}
+
+.confirmpopup span{
+    font-size: 15px;
+    margin-top: 20px;
+    font-style: italic;
+}
+.confirmpopup p{
+    margin: 0;
+    font-size: 13px;
+    font-style: italic;
+    color: red;
+    display: none;
+}
+.confirmpopup button{
+    background-color: green;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 25px;
+    border-radius:10px;
+}
+.confirmpopup input{
+    width: 22px;
+}
+
+#loading-screen {
+    position: fixed; /* Ensures it covers the entire screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-image: url(icons/Crownloadpage.jpg); /* Set background image */
+    background-size: cover; /* Make sure the image covers the entire area */
+    background-position: center; /* Center the background image */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Hide main content until the page loads */
+.hidden {
+    display: none;
+}
+
+/* Display main content once loading is complete */
+#main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

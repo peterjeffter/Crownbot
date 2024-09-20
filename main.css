@@ -270,16 +270,33 @@ h3{
 }
 
 #loading-screen {
-    background-image: url(icons/Crown.gif); /* Set GIF as background */
-    background-size: cover; /* Ensure it covers the entire screen */
-    background-position: center;
+    position: fixed; /* Ensures it covers the entire screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-image: url(icons/Crownloadpage.jpg); /* Set background image */
+    background-size: cover; /* Make sure the image covers the entire area */
+    background-position: center; /* Center the background image */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 /* Hide main content until the page loads */
 .hidden {
     display: none;

@@ -6,7 +6,7 @@ body{
     background: linear-gradient(to top, rgb(66, 66, 133) 20%, lightblue 70%);
     height: 100vh;
     margin: 0;
-    background-image: url(pexels-danielabsi-952670.jpg);
+    background-image: url(icons/backgroundblack.png);
     background-size: contain;
     font-family: "Roboto", sans-serif;
 }

@@ -53,11 +53,10 @@ body{
     flex-direction: column;
     align-items: center;
     position: absolute;
-    bottom: 70px;
+    bottom: 110px;
     left: 0;
     right: 0;
     color: white;
-    
 }
 .friendslist h3{
     background-color: whitesmoke;
@@ -78,6 +77,17 @@ body{
     align-items: center;
     position: relative;
 }
+.friendslist span{
+    font-size: 13px;
+    background-color: black;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    opacity: 0.5;
+}
 .friendslist div::after{
     content: '';
     position: absolute;
@@ -91,8 +101,21 @@ body{
 .friendslist div:last-child::after{
     content: none;
 }
-.friendslist button{
-    width: 100%;
+.btndiv{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    position: fixed;
+    bottom: 70px;
+}
+.copylink{
+    background-color: green;
+    border: none;
+    width: 13%;
+    border-radius: 10px;
+}
+.sharelink{
+    width: 85%;
     height: 40px;
     background-color: green;
     color: white;
@@ -101,6 +124,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 .friendslist button img{
     width: 15px;
@@ -256,18 +280,27 @@ h3{
 }
 
 .confirmpopup span{
-    font-size: 18px;
-    
+    font-size: 15px;
+    margin-top: 20px;
+    font-style: italic;
+}
+.confirmpopup p{
+    margin: 0;
+    font-size: 13px;
+    font-style: italic;
+    color: red;
+    display: none;
 }
 .confirmpopup button{
     background-color: green;
     color: white;
     border: none;
     width: 100px;
-    height: 20px;
+    height: 25px;
+    border-radius:10px;
 }
 .confirmpopup input{
-    width: 60px;
+    width: 22px;
 }
 
 #loading-screen {

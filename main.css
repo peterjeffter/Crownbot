@@ -138,9 +138,7 @@ body{
 .baldiv{
     display: flex;
 }
-.profileicon{
-    width: 32px;
-}
+
 .profpic{
     margin-right: 30px;
     width: 50px;
@@ -213,6 +211,9 @@ h3{
     color: white;
     opacity: 0.5;
     margin-left: 10px;
+}
+.navtoprofile{
+    text-decoration: none;
 }
 .claimbtn{
     position: absolute;

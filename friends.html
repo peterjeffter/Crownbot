@@ -39,35 +39,28 @@
         }
     });
 });
-  // Check if Telegram WebApp exists
-            if (window.Telegram && window.Telegram.WebApp) {
-                // Ensure Telegram Web App is ready
-                window.Telegram.WebApp.ready(() => {
-                    console.log("Telegram WebApp is ready!");
+  // Ensure the Telegram Web App is initialized
+    Telegram.WebApp.ready();
 
-                    // Setup the main button (share action button)
-                    window.Telegram.WebApp.MainButton.setParams({
-                        text: "Share with friends", // Button text
-                        color: "#4CAF50", // Custom color
-                    }).show(); // Display the button
-                });
+// Function to handle the share action
+function shareContent() {
+    const shareData = {
+        message: "Check out this awesome Mini App!", // Message to be shared
+        url: "https://t.me/Thecrownminebot", // Link to your mini app or content
+    };
 
-                // Attach the shareContent function to both the inline button and the Telegram main button
-                document.getElementById("shareButton").addEventListener("click", shareContent);
-                window.Telegram.WebApp.MainButton.onClick(shareContent);
-            } else {
-                console.error('Telegram WebApp is not available');
-            };
+    // Invoke Telegram's shareData() method
+    Telegram.WebApp.shareData(shareData)
+        .then(() => {
+            console.log("Content shared successfully!");
+        })
+        .catch((error) => {
+            console.error("Error sharing content:", error);
+        });
+}
 
-        // Function to handle share action using a deep link
-        function shareContent() {
-            // Telegram's native deep link for sharing content
-            const shareLink = encodeURI('https://t.me/Thecrownminebot');
-
-            // Use window.open to share in a new tab (works on mobile too)
-            window.open(shareLink, '_blank');
-        }
-
+// Attach the shareContent function to the button
+document.getElementById("shareButton").addEventListener("click", shareContent);
         </script>
 </body>
 </html>

@@ -41,11 +41,11 @@
 });
 
              // Ensure Telegram Web App is ready
-        Telegram.WebApp.ready(() => {
+        window.Telegram.WebApp.ready(() => {
             console.log("Telegram WebApp is ready!"); // Debugging initialization
 
             // Setup the main button (share action button)
-            Telegram.WebApp.MainButton.setParams({
+            window.Telegram.WebApp.MainButton.setParams({
                 text: "Share with friends", // Button text
                 color: "#4CAF50", // Custom color
             }).show(); // Display the button
@@ -63,7 +63,7 @@
         // Attach the shareContent function to both the inline button and the Telegram main button
         document.getElementById("shareButton").addEventListener("click", shareContent);
         
-        Telegram.WebApp.MainButton.onClick(shareContent); // Trigger when main button is clicked
+        window.Telegram.WebApp.MainButton.onClick(shareContent); // Trigger when main button is clicked
         </script>
 </body>
 </html>

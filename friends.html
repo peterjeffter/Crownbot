@@ -40,20 +40,30 @@
     });
 });
 
-             // Ensure the Telegram Web App is initialized
-        Telegram.WebApp.ready();
+             // Ensure Telegram Web App is ready
+        Telegram.WebApp.ready(() => {
+            console.log("Telegram WebApp is ready!"); // Debugging initialization
 
-        // Function to handle the share action using a deep link
+            // Setup the main button (share action button)
+            Telegram.WebApp.MainButton.setParams({
+                text: "Share with friends", // Button text
+                color: "#4CAF50", // Custom color
+            }).show(); // Display the button
+        });
+
+        // Function to handle share action using a deep link (inline button logic)
         function shareContent() {
-            // The URL or content you want to share
-            const shareLink = 'https://t.me/share/url?url=https://example.com&text=Check%20out%20this%20awesome%20Mini%20App!';
-
-            // Open the Telegram app or web version with the share link
-            window.open(shareLink);
+            // Telegram's native deep link for sharing content
+            const shareLink = 'https://t.me/share/url?url=https://example.com&text=Invite%20friends%20to%20this%20awesome%20mini%20app!';
+            
+            // Use window.open to share in a new tab (works on mobile too)
+            window.open(shareLink, '_blank');
         }
 
-        // Attach the shareContent function to the button
+        // Attach the shareContent function to both the inline button and the Telegram main button
         document.getElementById("shareButton").addEventListener("click", shareContent);
+        
+        Telegram.WebApp.MainButton.onClick(shareContent); // Trigger when main button is clicked
         </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
         </div>
         <div class="btndiv">
             <button class="copylink"><img src="icons/copy.png" alt=""></button>
-            <button class="sharelink"><img src="icons/link.png" alt="">Invite friends</button>
+            <button id="shareButton" class="sharelink"><img src="icons/link.png" alt="">Invite friends</button>
            </div>
         <div class="footer">
             <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="" >Mine</a>
@@ -40,6 +40,28 @@
     });
 });
 
+             // Ensure the Telegram Web App is initialized
+        Telegram.WebApp.ready();
+
+        // Function to handle the share action
+        function shareContent() {
+            const shareData = {
+                message: "Check out this awesome Mini App!", // Message to be shared
+                url: "https://example.com", // Link to your mini app or content
+            };
+
+            // Invoke Telegram's shareData() method
+            Telegram.WebApp.shareData(shareData)
+                .then(() => {
+                    console.log("Content shared successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error sharing content:", error);
+                });
+        }
+
+        // Attach the shareContent function to the button
+        document.getElementById("shareButton").addEventListener("click", shareContent);
         </script>
 </body>
 </html>

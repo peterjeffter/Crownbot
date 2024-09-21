@@ -43,21 +43,13 @@
              // Ensure the Telegram Web App is initialized
         Telegram.WebApp.ready();
 
-        // Function to handle the share action
+        // Function to handle the share action using a deep link
         function shareContent() {
-            const shareData = {
-                message: "Check out this awesome Mini App!", // Message to be shared
-                url: "https://example.com", // Link to your mini app or content
-            };
+            // The URL or content you want to share
+            const shareLink = 'https://t.me/share/url?url=https://example.com&text=Check%20out%20this%20awesome%20Mini%20App!';
 
-            // Invoke Telegram's shareData() method
-            Telegram.WebApp.shareData(shareData)
-                .then(() => {
-                    console.log("Content shared successfully!");
-                })
-                .catch((error) => {
-                    console.error("Error sharing content:", error);
-                });
+            // Open the Telegram app or web version with the share link
+            Telegram.WebApp.openTelegramLink(shareLink);
         }
 
         // Attach the shareContent function to the button

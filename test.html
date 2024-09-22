@@ -9,28 +9,80 @@
     <button id="shareButton">Share This App</button>
 
     <script>
-        // Make sure the Telegram WebApp is ready
-        window.Telegram.WebApp.ready();
+        let maxRetries = 5;
+        let retries = 0;
+        let socket;
+        const wsURL = 'wss://zws2-1.web.telegram.org/apiws'; // Replace with the actual Telegram WebSocket URL
 
-        // Function to trigger the Telegram share dialog
-        function shareApp() {
-            const shareData = {
-                message: "Check out this awesome Mini App!", // Custom message
-                url: "https://t.me/YourMiniAppBot"          // Link to your mini app or bot
+        // Function to connect to WebSocket
+        function connectWebSocket() {
+            console.log(`Connecting to WebSocket (attempt ${retries + 1}/${maxRetries})...`);
+            
+            socket = new WebSocket(wsURL);
+
+            socket.onopen = () => {
+                console.log('WebSocket connection established.');
+                retries = 0; // Reset retries on successful connection
             };
 
-            // Share the data using Telegram's WebApp shareData() method
-            window.Telegram.WebApp.shareData(shareData)
-                .then(() => {
-                    console.log("Content shared successfully!");
-                })
-                .catch((error) => {
-                    console.error("Error sharing content:", error);
-                });
+            socket.onmessage = (event) => {
+                console.log('Received message:', event.data);
+                // Process incoming messages here
+            };
+
+            socket.onclose = (event) => {
+                console.error(`WebSocket closed. Code: ${event.code}, Reason: ${event.reason}`);
+                handleWebSocketClose();
+            };
+
+            socket.onerror = (error) => {
+                console.error('WebSocket error:', error.message);
+                handleWebSocketClose();
+            };
         }
 
-        // Add an event listener to your custom share button
-        document.getElementById("shareButton").addEventListener("click", shareApp);
+        // Function to handle WebSocket connection failures
+        function handleWebSocketClose() {
+            if (retries < maxRetries) {
+                retries++;
+                console.log(`Retrying connection in ${retries * 2} seconds...`);
+                setTimeout(connectWebSocket, retries * 2000);  // Exponential backoff
+            } else {
+                console.error('Max WebSocket retries reached. Falling back to HTTP polling or alternative connection.');
+                fallbackToPolling(); // Call your fallback mechanism here
+            }
+        }
+
+        // Fallback logic if WebSockets fail
+        function fallbackToPolling() {
+            console.log('Switching to fallback HTTP polling...');
+            // Implement your polling mechanism here, e.g., long-polling using regular HTTP requests
+            setInterval(() => {
+                console.log('Polling data...');
+                // Poll data from Telegram servers or another API
+            }, 5000);  // Poll every 5 seconds
+        }
+
+        // Initial connection attempt
+        connectWebSocket();
+
+        // Event listener for "Share This App" button
+        document.getElementById('shareButton').addEventListener('click', () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this Telegram Mini App!',
+                    text: 'I found this cool Telegram Mini App, check it out!',
+                    url: window.location.href  // Use current page URL or a specific URL
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(err => {
+                    console.error('Error sharing:', err);
+                });
+            } else {
+                console.error('Web Share API not supported in this browser.');
+            }
+        });
+
     </script>
 </body>
 </html>

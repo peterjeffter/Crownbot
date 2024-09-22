@@ -3,93 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet">
-    <title>Crown mine</title>
-    <link rel="stylesheet" href="main.css">
-    <style>
-        /* Styles for the loading spinner */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.spinner {
-    border: 8px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 8px solid #3498db;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Hide main content until the page loads */
-.hidden {
-    display: none;
-}
-
-/* Display main content once loading is complete */
-#main-content {
-    display: block;
-}
-
-    </style>
+    <title>Telegram Mini App Share Button</title>
 </head>
 <body>
+    <button id="shareButton">Share This App</button>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="spinner"></div>
-        <p>Loading...</p>
-    </div>
+    <script>
+        // Make sure the Telegram WebApp is ready
+        window.Telegram.WebApp.ready();
 
-    <!-- Main Content -->
-    <div id="main-content" class="hidden">
-        <img class="bigcrown" src="icons/crownn.png" alt="">
-        <a href="profilesettings.html"><img class="profileicon" src="icons/user.png" alt=""></a>
+        // Function to trigger the Telegram share dialog
+        function shareApp() {
+            const shareData = {
+                message: "Check out this awesome Mini App!", // Custom message
+                url: "https://t.me/YourMiniAppBot"          // Link to your mini app or bot
+            };
 
-        <div class="balsection">
-            <img class="balicon" src="icons/crownn.png" alt="">
-            <p id="balance">0</p>
-        </div>
-        <button class="claimbtn" id="startMining">Start Mining</button>
+            // Share the data using Telegram's WebApp shareData() method
+            window.Telegram.WebApp.shareData(shareData)
+                .then(() => {
+                    console.log("Content shared successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error sharing content:", error);
+                });
+        }
 
-        <div class="footer">
-            <a class="nav-icon" href=""><img src="icons/home.png" alt="">Mine</a>
-            <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
-            <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
-            <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
-        </div>
-    </div>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script defer src="appp.js"></script>
-    <script defer>
-        // loading.js
-
-window.addEventListener('load', function () {
-    // Hide the loading screen and display the main content
-    const loadingScreen = document.getElementById('loading-screen');
-    const mainContent = document.getElementById('main-content');
-
-    loadingScreen.style.display = 'none';  // Hide loading screen
-    mainContent.classList.remove('hidden');  // Show main content
-});
-
+        // Add an event listener to your custom share button
+        document.getElementById("shareButton").addEventListener("click", shareApp);
     </script>
 </body>
 </html>

@@ -346,3 +346,7 @@ h3{
     justify-content: center;
     align-items: center;
 }
+.message{
+    position: absolute;
+    color: white;
+}

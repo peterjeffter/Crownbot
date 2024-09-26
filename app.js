@@ -1,77 +1,77 @@
-// Initialize variables
-let balance = 0;
-let miningSessionActive = false;
-let claimableRoses = 0; // To track roses available to claim
-const originalButtonColor = 'rgb(121, 196, 78)';
+const TelegramBot = require('node-telegram-bot-api');
+
+// Replace 'YOUR_TOKEN' with the token you got from BotFather
+const bot = new TelegramBot('7710762858:AAH5ZFjQRCC1yX4Y1VBA1Qrgez2hhPVL32M', { polling: true });
+
+// Listen for the /start command
+bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    const username = msg.from.username; // Extract the user's Telegram username
+
+    // Welcome message
+    const welcomeMessage = `Hello ${username}, Welcome to the Crown Club. Enter to collect your crowns!`;
+
+    // Inline keyboard with buttons arranged two per line
+    const options = {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: "Visit Our Channel", // Button text
+                        url: "https://t.me/+9QJLJVYQLJU1Njdk" // Replace with your channel link
+                    },
+                    {
+                        text: "Contact Support", // Second button text
+                        url: "https://t.me/YourSupportUsername" // Replace with your support link or another action
+                    }
+                ],
+                [
+                    {
+                        text: "Follow X", // Third button text
+                        url: "https://x.com/crowntgbot?s=21" // Replace with your support link or another action
+                    },
+                    {
+                        text: "YouTube", // Fourth button text
+                        url: "https://youtube.com/@crown-bot?si=mzH-lUmANad5jqKz" // Replace with your YouTube link
+                    }
+                ]
+            ]
+        }
+    };
+
+    // Send the welcome message with the inline keyboard
+    bot.sendMessage(chatId, welcomeMessage, options);
+});
 
 
-function formatNumber(number) {
-    return new Intl.NumberFormat().format(number);
-}
-// Function to update the UI
-function updateUI() {
-    const balanceElement = document.getElementById('balance');
-    const startMiningButton = document.getElementById('startMining');
 
-    // Update the balance display
-    balanceElement.innerText = formatNumber(balance);
+// Initialize Telegram WebApp
+Telegram.WebApp.ready();
 
-    if (miningSessionActive) {
-        startMiningButton.innerText = 'Mining...';
-        startMiningButton.style.backgroundColor = 'grey';
-        startMiningButton.style.borderStyle = 'dotted';
-        startMiningButton.disabled = true;
-    } else if (claimableRoses > 0) {
-        startMiningButton.innerText = `Claim ${claimableRoses} Xtals`;
-        startMiningButton.style.backgroundColor = 'rgb(121, 196, 78)';
-        startMiningButton.style.borderStyle = 'none';
-        startMiningButton.disabled = false;
-    } else {
-        startMiningButton.innerText = 'Start Mining';
-        startMiningButton.backgroundColor = originalButtonColor;
-        startMiningButton.disabled = false;
-    }
-}
+// Function to update the button based on the current page
+function updateButton() {
+  const isIndexPage = window.location.pathname === '/index.html';
 
-// Function to simulate mining
-function startMining() {
-    if (miningSessionActive) return;
+  if (isIndexPage) {
+    // If on index.html, show 'Close'
+    Telegram.WebApp.MainButton.setText('Close');
+    Telegram.WebApp.MainButton.onClick(() => {
+      Telegram.WebApp.close();  // Closes the web app
+    });
+  } else {
+    // If not on index.html, show 'Back'
+    Telegram.WebApp.MainButton.setText('Back');
+    Telegram.WebApp.MainButton.onClick(() => {
+      window.history.back();  // Navigate back to the previous page
+    });
+  }
 
-    if (claimableRoses > 0) {
-        // Handle claiming roses
-        balance += claimableRoses;
-        claimableRoses = 0;
-        updateUI();
-        return;
-    }
-
-    miningSessionActive = true;
-    updateUI();
-
-    // Simulate a mining session of 3 hours (set to 3 seconds for demonstration)
-    setTimeout(() => {
-        claimableRoses = 500000; // Simulate mining 1000 roses
-        miningSessionActive = false;
-        updateUI();
-    }, 3000); // Simulate the 3-hour delay in 3 seconds
-}
-
-// Add event listener to the Start Mining button
-document.getElementById('startMining').addEventListener('click', startMining);
-
-// Initial UI update
-updateUI();
-
-// Telegram WebApp Authentication
-window.Telegram.WebApp.ready();
-const user = window.Telegram.WebApp.initDataUnsafe.user;
-
-if (user) {
-
-    console.log(`User ID: ${user.id}`);
-    console.log(`First Name: ${user.first_name}`);
-    console.log(`Last Name: ${user.last_name}`);
-} else {
-    console.log('User is not authenticated via Telegram');
+  // Make the MainButton visible
+  Telegram.WebApp.MainButton.show();
 }
 
+// Call the function initially
+updateButton();
+
+// Listen for changes in navigation (if using single-page apps)
+window.addEventListener('popstate', updateButton);

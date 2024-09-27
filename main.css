@@ -349,6 +349,7 @@ h3{
 /* Display main content once loading is complete */
 #main-content {
     display: none;
+    justify-content: center;
 }
 .message{
     position: absolute;

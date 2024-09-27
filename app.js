@@ -44,7 +44,6 @@ bot.onText(/\/start/, (msg) => {
 });
 
 
-
 // Initialize Telegram WebApp
 Telegram.WebApp.ready();
 
@@ -73,5 +72,5 @@ function updateButton() {
 // Call the function initially
 updateButton();
 
-// Listen for changes in navigation (if using single-page apps)
+// Listen for changes in navigation (for single-page apps)
 window.addEventListener('popstate', updateButton);

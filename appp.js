@@ -147,7 +147,7 @@ if (!sessionStorage.getItem('pageLoaded')) {
         // Set a minimum display time for the loading screen (e.g., 3 seconds)
         setTimeout(() => {
             loadingScreen.style.display = 'none';  // Hide loading screen
-            mainContent.classList.remove('hidden');  // Show main content
+            mainContent.style.display = 'flex';  // Show main content
 
             // Store in sessionStorage that the page has been loaded
             sessionStorage.setItem('pageLoaded', 'true');
@@ -156,8 +156,9 @@ if (!sessionStorage.getItem('pageLoaded')) {
 } else {
     // Page was already loaded in this session: Skip loading screen
     document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('main-content').classList.remove('hidden');
+    document.getElementById('main-content').style.display = 'flex';  // Show main content immediately
 }
+
 
 
         

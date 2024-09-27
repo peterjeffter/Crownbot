@@ -5,14 +5,12 @@ Telegram.WebApp.ready();
 function updateNavigationButton() {
   const isIndexPage = window.location.pathname === '/index.html'; // Check if we're on the homepage
   
-  // Show the "Close" button on the homepage
   if (isIndexPage) {
-    Telegram.WebApp.BackButton.hide(); // Hide the "Back" button on the homepage
-    Telegram.WebApp.CloseButton.show(); // Show the "Close" button on the homepage
+    // Hide the "Back" button on the homepage (default Close button will appear)
+    Telegram.WebApp.BackButton.hide();
   } else {
     // Show the "Back" button on all other pages
-    Telegram.WebApp.CloseButton.hide(); // Hide the "Close" button on other pages
-    Telegram.WebApp.BackButton.show(); // Show the "Back" button
+    Telegram.WebApp.BackButton.show();
     Telegram.WebApp.BackButton.onClick(() => {
       window.history.back(); // Navigate to the previous page
     });

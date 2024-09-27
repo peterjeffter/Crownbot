@@ -1,30 +1,24 @@
 // Initialize Telegram WebApp
 Telegram.WebApp.ready();
 
-// Function to update the button based on the current page
-function updateButton() {
+// Function to update the navigation button based on the current page
+function updateNavigationButton() {
   const isIndexPage = window.location.pathname === '/index.html';
 
   if (isIndexPage) {
-    // If on index.html, show 'Close'
-    Telegram.WebApp.MainButton.setText('Close');
-    Telegram.WebApp.MainButton.onClick(() => {
-      Telegram.WebApp.close();  // Closes the web app
-    });
+    // Show the default "Close" button
+    Telegram.WebApp.BackButton.hide(); // Hide the "Back" button
   } else {
-    // If not on index.html, show 'Back'
-    Telegram.WebApp.MainButton.setText('Back');
-    Telegram.WebApp.MainButton.onClick(() => {
-      window.history.back();  // Navigate back to the previous page
+    // Show the "Back" button instead of the "Close" button
+    Telegram.WebApp.BackButton.show();
+    Telegram.WebApp.BackButton.onClick(() => {
+      window.history.back(); // Navigate to the previous page
     });
   }
-
-  // Make the MainButton visible
-  Telegram.WebApp.MainButton.show();
 }
 
 // Call the function initially
-updateButton();
+updateNavigationButton();
 
-// Listen for changes in navigation (for single-page apps)
-window.addEventListener('popstate', updateButton);
+// Listen for page changes (if using single-page apps or dynamically loading pages)
+window.addEventListener('popstate', updateNavigationButton);

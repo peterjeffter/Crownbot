@@ -204,20 +204,7 @@ body{
     align-items: center;
     position: relative;
 }
-h3{
-    color: white;
-    background-color:rgba(10, 10, 10, 0.796);
-    height: 50px;
-    position: absolute;
-    top: -68px;
-    padding:  3px 30px 0 30px;
-    font-size: 15px;
-    font-weight: 100;
-    text-align: center;
-    font-style: italic;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
+
 .tasksdiv img{
     width: 24px;
 }
@@ -235,7 +222,21 @@ h3{
     padding: 0 10px 0 10px;
     z-index: 100;
 }
-.tasksdiv span{
+.taskhead{
+    color: white;
+    background-color:rgba(10, 10, 10, 0.796);
+    height: 50px;
+    position: absolute;
+    top: -40px;
+    padding:  3px 30px 0 30px;
+    font-size: 15px;
+    font-weight: 100;
+    text-align: center;
+    font-style: italic;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.tasksdiv div span{
     color: gold;
     font-size: 10px;
     margin-top: 20px;
@@ -330,7 +331,7 @@ h3{
     position: fixed; /* Ensures it covers the entire screen */
     top: 0;
     left: 0;
-     width: 100vw;
+    width: 100vw;
     height: 100vh;
     background-image: url(icons/Crownloadpage.jpg); /* Set background image */
     background-size: cover; /* Ensure the image covers the entire area */

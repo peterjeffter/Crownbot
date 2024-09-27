@@ -348,10 +348,7 @@ h3{
 
 /* Display main content once loading is complete */
 #main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: none;
 }
 .message{
     position: absolute;

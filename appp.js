@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // loading.js
-
 // Check if the page has been loaded during the session
 if (!sessionStorage.getItem('pageLoaded')) {
     // First time loading in this session: Show loading screen
@@ -149,6 +148,9 @@ if (!sessionStorage.getItem('pageLoaded')) {
             loadingScreen.style.display = 'none';  // Hide loading screen
             mainContent.style.display = 'flex';  // Show main content
 
+            // Expand the mini-app to full view
+            Telegram.WebApp.expand();
+
             // Store in sessionStorage that the page has been loaded
             sessionStorage.setItem('pageLoaded', 'true');
         }, 3000); // Adjust the delay as needed (3000ms = 3 seconds)
@@ -157,6 +159,9 @@ if (!sessionStorage.getItem('pageLoaded')) {
     // Page was already loaded in this session: Skip loading screen
     document.getElementById('loading-screen').style.display = 'none';
     document.getElementById('main-content').style.display = 'flex';  // Show main content immediately
+
+    // Expand the mini-app to full view
+    Telegram.WebApp.expand();
 }
 
 

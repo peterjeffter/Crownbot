@@ -3,10 +3,11 @@ Telegram.WebApp.ready();
 
 // Function to update the navigation button based on the current page
 function updateNavigationButton() {
-  const isProfPage = window.location.pathname === '/index.html'; // Adjust the path if your homepage has a different filename
+  const isProfPage = window.location.pathname === '/profilesetting.html'; // Adjust the path if your homepage has a different filename
   const isTaskPage = window.location.pathname === '/tasks.html';
   const isFriendsPage = window.location.pathname === '/friends.html';
   const isAirdropPage = window.location.pathname === '/airdrop.html';
+  const isIndexPage = window.location.pathname === '/index.html';
   
   // Show the "Back" button if on any page except the homepage
   if (isProfPage || isTaskPage || isFriendsPage || isAirdropPage) {
@@ -14,11 +15,13 @@ function updateNavigationButton() {
     Telegram.WebApp.BackButton.onClick(() => {
       window.history.back(); // Navigate to the previous page
     });
-  } else {
-    // Hide the "Back" button on other pages
-    Telegram.WebApp.BackButton.hide(); // This can be used if you want to revert to the default close button.
+  }
+  if(isIndexPage){
+    Telegram.WebApp.BackButton.hide();
+    Telegram.WebApp.CloseButton.show(); 
   }
 }
+
 
 // Call the function initially to set up the button
 updateNavigationButton();

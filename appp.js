@@ -137,21 +137,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // loading.js
 
-// Check if the page has been loaded before
-if (!localStorage.getItem('pageLoaded')) {
-    // First time loading: Show loading screen
+// Check if the page has been loaded during the session
+if (!sessionStorage.getItem('pageLoaded')) {
+    // First time loading in this session: Show loading screen
     window.addEventListener('load', function () {
         const loadingScreen = document.getElementById('loading-screen');
         const mainContent = document.getElementById('main-content');
-    
-        loadingScreen.style.display = 'none';  // Hide loading screen
-        mainContent.classList.remove('hidden');  // Show main content
 
-        // Store in localStorage that the page has been loaded
-        localStorage.setItem('pageLoaded', 'true');
+        // Set a minimum display time for the loading screen (e.g., 3 seconds)
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';  // Hide loading screen
+            mainContent.classList.remove('hidden');  // Show main content
+
+            // Store in sessionStorage that the page has been loaded
+            sessionStorage.setItem('pageLoaded', 'true');
+        }, 3000); // Adjust the delay as needed (3000ms = 3 seconds)
     });
 } else {
-    // Page was already loaded before: Skip loading screen
+    // Page was already loaded in this session: Skip loading screen
     document.getElementById('loading-screen').style.display = 'none';
     document.getElementById('main-content').classList.remove('hidden');
 }

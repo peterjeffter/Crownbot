@@ -330,8 +330,8 @@ h3{
     position: fixed; /* Ensures it covers the entire screen */
     top: 0;
     left: 0;
-    /* Full viewport width */
-     /* Full viewport height */
+     width: 100vw;
+    height: 100vh;
     background-image: url(icons/Crownloadpage.jpg); /* Set background image */
     background-size: cover; /* Ensure the image covers the entire area */
     background-position: center; /* Center the background image */
@@ -348,6 +348,7 @@ h3{
     width: 60px;
     height: 60px;
     animation: spin 1s linear infinite;
+    opacity: 0.5;
 }
 
 @keyframes spin {

@@ -15,6 +15,7 @@ function updateNavigationButton() {
     Telegram.WebApp.BackButton.hide();
   } else if( isProfPage || isTaskPage || isFriendsPage || isAirdropPage){
     // Show the "Back" button on all other pages
+    Telegram.WebApp.CloseButton.hide();
     Telegram.WebApp.BackButton.show();
     Telegram.WebApp.BackButton.onClick(() => {
       window.history.back(); // Navigate to the previous page

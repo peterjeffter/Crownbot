@@ -44,49 +44,6 @@ const showMessage = (msg, isError = false) => {
     setTimeout(() => messageElement.style.display = 'none', 2000);
 };
 
-document.getElementById('copyButton').addEventListener('click', () => {
-    navigator.clipboard.writeText('nameter')
-        .then(() => showMessage('Link copied to clipboard!'))
-        .catch(() => showMessage('Failed to copy the link!', true));
-});
-
-let retries = 0;
-const maxRetries = 5;
-const wsURL = 'wss://t.me/CrownclanBot.web.telegram.org/apiws';
-
-const connectWebSocket = () => {
-    const socket = new WebSocket(wsURL);
-    console.log(`Connecting to WebSocket (attempt ${retries + 1}/${maxRetries})...`);
-
-    socket.onopen = () => retries = 0;
-    socket.onmessage = (event) => console.log('Message:', event.data);
-    socket.onclose = () => handleWebSocketClose();
-    socket.onerror = () => handleWebSocketClose();
-};
-
-const handleWebSocketClose = () => {
-    if (retries++ < maxRetries) {
-        console.log(`Retrying in ${retries * 2}s...`);
-        setTimeout(connectWebSocket, retries * 2000);
-    } else {
-        console.log('Max retries reached, switching to polling...');
-        setInterval(() => console.log('Polling data...'), 5000);
-    }
-};
-
-connectWebSocket();
-
-document.getElementById('shareButton').addEventListener('click', () => {
-    const customLink = 'https://myapp.com/special-offer';
-    navigator.share?.({
-        title: 'Check out this Telegram Mini App!',
-        text: 'I found this cool Telegram Mini App, check it out!',
-        url: customLink
-    }).then(() => console.log('Thanks for sharing!'))
-      .catch(err => console.error('Share error:', err));
-});
-
-
 window.Telegram.WebApp.ready();
 const user = window.Telegram.WebApp.initDataUnsafe.user;
 
@@ -112,7 +69,15 @@ const user = window.Telegram.WebApp.initDataUnsafe.user;
     const referralElement = document.getElementById('reflink');
     referralElement.innerText = referralLink;
     referralElement.style.display = 'block'; // Make sure it's visible in the UI
+
+           document.getElementById('copyButton').addEventListener('click', () => {
+    navigator.clipboard.writeText(referralLink)
+        .then(() => showMessage('Link copied to clipboard!'))
+        .catch(() => showMessage('Failed to copy the link!', true));
+});
 }
+         
+
         </script>
 </body>
 </html>

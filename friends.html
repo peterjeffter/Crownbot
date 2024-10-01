@@ -47,29 +47,6 @@ document.getElementById('copyButton').addEventListener('click', () => {
         .then(() => showMessage('Link copied to clipboard!'))
         .catch(() => showMessage('Failed to copy the link!', true));
 });
-
-
- window.Telegram.WebApp.ready();
-const user = window.Telegram.WebApp.initDataUnsafe.user;
-
-if (user) {
-    console.log(`User ID: ${user.id}`);
-    console.log(`First Name: ${user.first_name}`);  
-    console.log(`Last Name: ${user.username}`);
-} else {
-    console.log('User is not authenticated via Telegram');
-}
-            
-function createReferralLink(userId) {
-    const botUsername = 'Crowntgbot'; // Your bot's username
-    const referralCode = `ref${user.id}`; // You can customize this as needed
-
-    // Construct the referral link
-    const referralLink = `https://t.me/${botUsername}?start=${referralCode}`;
-
-    // Display the referral link in the Mini App or console log it
-    console.log('User’s unique referral link:', referralLink);
-
         </script>
 </body>
 </html>

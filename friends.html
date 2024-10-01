@@ -24,7 +24,7 @@
             <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
             <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
         </div>
-        <div id="reflink"></div>
+        <div id="reflink" style="display: none;"></div>
 
         <script src="app.js"></script>
         <script>
@@ -98,20 +98,21 @@ const user = window.Telegram.WebApp.initDataUnsafe.user;
         console.log('No user info available.');
     }
 
-function createReferralLink(user) {
+    function createReferralLink(userId) {
     const botUsername = 'Crowntgbot'; // Your bot's username
-    const referralCode = `ref${user.id}`; // You can customize this as needed
+    const referralCode = `ref${userId}`; // Generate the referral code using the user ID
 
     // Construct the referral link
     const referralLink = `https://t.me/${botUsername}?start=${referralCode}`;
 
-    // Display the referral link in the Mini App or console log it
+    // Log the referral link to the console
     console.log('User’s unique referral link:', referralLink);
 
-    // Show the referral link in your UI for the user to copy/share
-    document.getElementById('reflink').innerText = referralLink;
+    // Display the referral link in the Mini App
+    const referralElement = document.getElementById('reflink');
+    referralElement.innerText = referralLink;
+    referralElement.style.display = 'block'; // Make sure it's visible in the UI
 }
-
         </script>
 </body>
 </html>

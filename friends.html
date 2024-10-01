@@ -24,6 +24,7 @@
             <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
             <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
         </div>
+        <div id="reflink"></div>
 
         <script src="app.js"></script>
         <script>
@@ -86,20 +87,20 @@ document.getElementById('shareButton').addEventListener('click', () => {
 });
 
 
-Telegram.WebApp.onEvent('init', function() {
-    let userId = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : null;
-    
-    if (userId) {
-        console.log("User's Telegram ID:", userId);
+window.Telegram.WebApp.ready();
+const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+    if (user) {
+        console.log(`"User's Telegram ID:", ${user.id}`);
         // Now that we have the user's ID, we can generate their unique referral link
-        createReferralLink(userId);
+        createReferralLink(user.id);
     } else {
         console.log('No user info available.');
     }
-});
-function createReferralLink(userId) {
+
+function createReferralLink(user) {
     const botUsername = 'Crowntgbot'; // Your bot's username
-    const referralCode = `ref${userId}`; // You can customize this as needed
+    const referralCode = `ref${user.id}`; // You can customize this as needed
 
     // Construct the referral link
     const referralLink = `https://t.me/${botUsername}?start=${referralCode}`;
@@ -108,7 +109,7 @@ function createReferralLink(userId) {
     console.log('User’s unique referral link:', referralLink);
 
     // Show the referral link in your UI for the user to copy/share
-    document.getElementById('referralLink').innerText = referralLink;
+    document.getElementById('reflink').innerText = referralLink;
 }
 
         </script>

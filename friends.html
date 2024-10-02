@@ -9,107 +9,76 @@
 <body>
     <p class="message" id="message"></p>
 
-    <div class="friendslist">
-        <h3>FRENS</h3>
-        <span>You have no friends</span>
-        <div id="referral" style="display: none;">samuel tor</div>
-    </div>
+        <div class="friendslist">
+            <h3>FRENS</h3>
+            <span>You have no friends</span>
+            <div id="referral" style="display: none;">samuel tor</div>
+        </div>
+        <div class="btndiv">
+            <button id="copyButton" class="copylink"><img src="icons/copy.png" alt=""></button>
+            <button id="shareButton" class="sharelink"><img src="icons/link.png" alt="">Invite friends</button>
+           </div>
+        <div class="footer">
+            <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="" >Mine</a>
+            <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
+            <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
+            <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
+        </div>
+        <div id="reflink" style="display: none;"></div>
 
-    <div class="btndiv">
-        <button id="copyButton" class="copylink"><img src="icons/copy.png" alt=""></button>
-        <button id="shareButton" class="sharelink"><img src="icons/link.png" alt="">Invite friends</button>
-    </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.nav-icon');
+    const currentPage = window.location.href.split('/').pop();
 
-    <div class="footer">
-        <a class="nav-icon" href="index.html"><img src="icons/home.png" alt="">Mine</a>
-        <a class="nav-icon" href="tasks.html"><img src="icons/task.png" alt="">Tasks</a>
-        <a class="nav-icon" href="airdrop.html"><img src="icons/airdrop.png" alt="">Airdrop</a>
-        <a class="nav-icon" href="friends.html"><img src="icons/friends.png" alt="">Frens</a>
-    </div>
+    icons.forEach(icon => {
+        icon.classList.toggle('active', icon.getAttribute('href') === currentPage);
+    });
+});
 
-    <div id="reflink" style="display: none;"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const icons = document.querySelectorAll('.nav-icon');
-            const currentPage = window.location.href.split('/').pop();
+const showMessage = (msg, isError = false) => {
+    const messageElement = document.getElementById('message');
+    messageElement.innerText = msg;
+    messageElement.style.display = 'block';
+    setTimeout(() => messageElement.style.display = 'none', 2000);
+};
 
-            icons.forEach(icon => {
-                icon.classList.toggle('active', icon.getAttribute('href') === currentPage);
-            });
-        });
+document.getElementById('copyButton').addEventListener('click', () => {
+    navigator.clipboard.writeText('gdhbf')
+        .then(() => showMessage('Link copied to clipboard!'))
+        .catch(() => showMessage('Failed to copy the link!', true));
+});
 
-        window.Telegram.WebApp.ready();
-        const user = window.Telegram.WebApp.initDataUnsafe.user;
+let retries = 0;
+const maxRetries = 5;
+const wsURL = 'wss://t.me/web.telegram.org/apiws';
 
-        let referralLink = '';  // Declare referralLink globally
+const connectWebSocket = () => {
+    const socket = new WebSocket(wsURL);
+    console.log(`Connecting to WebSocket (attempt ${retries + 1}/${maxRetries})...`);
 
-        if (user) {
-            console.log(`"User's Telegram ID:", ${user.id}`);
-            createReferralLink(user.id);  // Generate the referral link
-        } else {
-            console.log('No user info available.');
-        }
+    socket.onopen = () => retries = 0;
+    socket.onmessage = (event) => console.log('Message:', event.data);
+    socket.onclose = socket.onerror = () => retries++ < maxRetries 
+        ? setTimeout(connectWebSocket, retries * 2000) 
+        : setInterval(() => console.log('Polling data...'), 5000);
+};
 
-        function createReferralLink(userId) {
-            const botUsername = 'Crowntgbot'; // Your bot's username
-            const referralCode = `ref${userId}`; // Generate the referral code using the user ID
+connectWebSocket();
 
-            // Construct the referral link
-            referralLink = `https://t.me/${botUsername}?start=${referralCode}`;
 
-            // Log the referral link to the console
-            console.log('User’s unique referral link:', referralLink);
+document.getElementById('shareButton').addEventListener('click', () => {
+    const customLink = 'https://myapp.com/special-offer';
+    navigator.share?.({
+        title: 'Check out this Telegram Mini App!',
+        text: 'I found this cool Telegram Mini App, check it out!',
+        url: customLink
+    }).then(() => console.log('Thanks for sharing!'))
+      .catch(err => console.error('Share error:', err));
+});
 
-            // Display the referral link in the Mini App
-            const referralElement = document.getElementById('reflink');
-            referralElement.innerText = referralLink;
-            referralElement.style.display = 'block'; // Make sure it's visible in the UI
-        }
 
-        // Handle the copy button
-        document.getElementById('copyButton').addEventListener('click', () => {
-            navigator.clipboard.writeText(referralLink)  // Use the global referralLink
-                .then(() => showMessage('Link copied to clipboard!'))
-                .catch(() => showMessage('Failed to copy the link!', true));
-        });
-
-        const showMessage = (msg, isError = false) => {
-            const messageElement = document.getElementById('message');
-            messageElement.innerText = msg;
-            messageElement.style.display = 'block';
-            setTimeout(() => messageElement.style.display = 'none', 2000);
-        };
-
-        // WebSocket connection and polling
-        let retries = 0;
-        const maxRetries = 5;
-        const wsURL = 'wss://t.me/web.telegram.org/apiws';
-
-        const connectWebSocket = () => {
-            const socket = new WebSocket(wsURL);
-            console.log(`Connecting to WebSocket (attempt ${retries + 1}/${maxRetries})...`);
-
-            socket.onopen = () => retries = 0;
-            socket.onmessage = (event) => console.log('Message:', event.data);
-            socket.onclose = socket.onerror = () => retries++ < maxRetries
-                ? setTimeout(connectWebSocket, retries * 2000)
-                : setInterval(() => console.log('Polling data...'), 5000);
-        };
-
-        connectWebSocket();
-
-        // Share button event listener
-        document.getElementById('shareButton').addEventListener('click', () => {
-            const customLink = 'https://myapp.com/special-offer';
-            navigator.share?.({
-                title: 'Check out this Telegram Mini App!',
-                text: 'I found this cool Telegram Mini App, check it out!',
-                url: customLink
-            }).then(() => console.log('Thanks for sharing!'))
-              .catch(err => console.error('Share error:', err));
-        });
-
-    </script>
+        </script>
 </body>
 </html>
